@@ -149,7 +149,7 @@ class EventDetailsScreen extends StatelessWidget {
                   
                   // Proceed to Registration Button
                   ElevatedButton(
-                    onPressed: () => Get.toNamed(AppRoute.registrationCategory),
+                    onPressed: () => Get.toNamed(AppRoute.registrationCategory, arguments: event),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.secondaryGreen,
                       foregroundColor: Colors.white,

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../Utils/AppColors/app_colors.dart';
 import 'controller/registration_category_controller.dart';
+import '../model/event_model.dart';
+import '../../../../Core/AppRoute/app_route.dart';
 
 class RegistrationCategoryScreen extends StatelessWidget {
   const RegistrationCategoryScreen({super.key});
@@ -11,6 +13,7 @@ class RegistrationCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Instantiate or find the controller
     final controller = Get.put(RegistrationCategoryController());
+    final EventModel event = Get.arguments as EventModel;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -88,9 +91,7 @@ class RegistrationCategoryScreen extends StatelessWidget {
             
             // Register Now Bottom Button
             ElevatedButton(
-              onPressed: () {
-                // Future action hook
-              },
+              onPressed: () => Get.toNamed(AppRoute.athleteCredentials, arguments: event),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.secondaryGreen,
                 foregroundColor: Colors.white,
