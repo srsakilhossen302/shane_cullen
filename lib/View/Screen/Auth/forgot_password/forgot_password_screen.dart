@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../Core/AppRoute/app_route.dart';
 import '../../../../Utils/AppColors/app_colors.dart';
-import 'controller/login_controller.dart';
+import 'controller/forgot_password_controller.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Find or instantiate the LoginController
-    final controller = Get.put(LoginController());
+    final controller = Get.put(ForgotPasswordController());
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC), // Soft premium off-white/light blue background
@@ -23,7 +21,7 @@ class SignInScreen extends StatelessWidget {
               // Top Padding
               SizedBox(height: 24.h),
               
-              // "Back" top button
+              // "Back to Sign In" top button
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0.w),
                 child: GestureDetector(
@@ -38,7 +36,7 @@ class SignInScreen extends StatelessWidget {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        "Back",
+                        "Back to Sign In",
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
@@ -59,7 +57,7 @@ class SignInScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Sign In",
+                      "Forgot Password?",
                       style: TextStyle(
                         fontSize: 28.sp,
                         fontWeight: FontWeight.bold,
@@ -67,12 +65,13 @@ class SignInScreen extends StatelessWidget {
                         letterSpacing: -0.5,
                       ),
                     ),
-                    SizedBox(height: 6.h),
+                    SizedBox(height: 8.h),
                     Text(
-                      "Welcome back! Please enter your details",
+                      "No worries! Enter your email and we'll send you reset instructions.",
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: AppColors.textMuted,
+                        height: 1.4,
                       ),
                     ),
                   ],
@@ -81,7 +80,7 @@ class SignInScreen extends StatelessWidget {
               
               SizedBox(height: 36.h),
               
-              // White Card containing the login form
+              // White Card containing the forgot password form
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -110,52 +109,22 @@ class SignInScreen extends StatelessWidget {
                         prefixIcon: Icons.mail_outline,
                       ),
                       
-                      // Password Field
-                      _buildLabel("Password"),
-                      Obx(() => _buildTextField(
-                        hintText: "••••••••",
-                        prefixIcon: Icons.lock_outline,
-                        obscureText: !controller.isPasswordVisible.value,
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            controller.isPasswordVisible.value
-                                ? Icons.visibility_outlined
-                                : Icons.visibility_off_outlined,
-                            color: AppColors.textMuted,
-                            size: 20.r,
-                          ),
-                          onPressed: controller.togglePasswordVisibility,
-                        ),
-                      )),
-                      
-                      // Forgot Password Link
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () => Get.toNamed(AppRoute.forgotPassword),
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            minimumSize: const Size(0, 0),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              color: AppColors.secondaryGreen,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                      // Caption helper text below input
+                      Text(
+                        "We'll send a password reset link to this email address.",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: AppColors.textMuted,
                         ),
                       ),
                       
                       SizedBox(height: 32.h),
                       
-                      // Sign In Button
+                      // Send Reset Link Button
                       Obx(() => ElevatedButton(
                         onPressed: controller.isLoading.value
                             ? null
-                            : () => controller.login("email", "password"),
+                            : () => controller.sendResetLink("email"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.secondaryGreen,
                           foregroundColor: Colors.white,
@@ -171,7 +140,7 @@ class SignInScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Sign In",
+                                    "Send Reset Link",
                                     style: TextStyle(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.bold,
@@ -185,21 +154,21 @@ class SignInScreen extends StatelessWidget {
                       
                       SizedBox(height: 36.h),
                       
-                      // Footer: Don't have an account? Create Account
+                      // Footer: Remember your password? Sign In
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Don't have an account? ",
+                            "Remember your password? ",
                             style: TextStyle(
                               fontSize: 14.sp,
                               color: AppColors.textMuted,
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => Get.toNamed(AppRoute.register),
+                            onTap: () => Get.back(),
                             child: Text(
-                              "Create Account",
+                              "Sign In",
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 color: AppColors.secondaryGreen,
@@ -238,17 +207,14 @@ class SignInScreen extends StatelessWidget {
   Widget _buildTextField({
     required String hintText,
     required IconData prefixIcon,
-    Widget? suffixIcon,
-    bool obscureText = false,
   }) {
     return Container(
-      margin: EdgeInsets.only(top: 8.h, bottom: 20.h),
+      margin: EdgeInsets.only(top: 8.h, bottom: 8.h),
       decoration: BoxDecoration(
-        color: const Color(0xFFF1F5F9), // Soft premium grey background matching Register screen
+        color: const Color(0xFFF1F5F9), // Soft premium grey background matching design theme
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: TextField(
-        obscureText: obscureText,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(
@@ -261,7 +227,6 @@ class SignInScreen extends StatelessWidget {
             color: AppColors.textMuted,
             size: 20.r,
           ),
-          suffixIcon: suffixIcon,
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         ),
