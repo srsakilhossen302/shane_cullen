@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import '../../View/Screen/SplashScreen/splash_screen.dart';
 import '../../View/Screen/Auth/login/login_screen.dart';
+import '../../View/Screen/Auth/register/register_screen.dart';
 
 class AppRoute {
   static const String splash = "/splash_screen";
   static const String login = "/login_screen";
+  static const String register = "/register_screen";
 
   static List<GetPage> routes = [
     GetPage(
@@ -14,6 +16,10 @@ class AppRoute {
     GetPage(
       name: login,
       page: () => const LoginScreen(),
+    ),
+    GetPage(
+      name: register,
+      page: () => const RegisterScreen(),
     ),
   ];
 }
