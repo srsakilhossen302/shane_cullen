@@ -160,10 +160,8 @@ class LoginScreen extends StatelessWidget {
                         const Spacer(flex: 1),
 
                         // Sign In Button
-                        Obx(() => ElevatedButton(
-                          onPressed: controller.isLoading.value
-                              ? null
-                              : () => controller.login("demo", "password"),
+                        ElevatedButton(
+                          onPressed: () => Get.toNamed(AppRoute.signIn),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.secondaryGreen,
                             foregroundColor: Colors.white,
@@ -189,7 +187,7 @@ class LoginScreen extends StatelessWidget {
                                     Icon(Icons.arrow_forward, size: 18.r),
                                   ],
                                 ),
-                        )),
+                        ),
 
                         SizedBox(height: 48.h),
 
