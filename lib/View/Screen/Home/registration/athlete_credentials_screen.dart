@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../Utils/AppColors/app_colors.dart';
 import '../model/event_model.dart';
 import 'controller/athlete_credentials_controller.dart';
+import '../../../../Core/AppRoute/app_route.dart';
 
 class AthleteCredentialsScreen extends StatelessWidget {
   const AthleteCredentialsScreen({super.key});
@@ -390,7 +391,7 @@ class AthleteCredentialsScreen extends StatelessWidget {
                   
                   // Confirm Registration Button
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => Get.toNamed(AppRoute.divisionSelection),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.secondaryGreen,
                       foregroundColor: Colors.white,
