@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shane_cullen/Utils/AppColors/app_colors.dart';
 import '../model/event_model.dart';
+import '../../../../Core/AppRoute/app_route.dart';
 
 class EventDetailsScreen extends StatelessWidget {
   const EventDetailsScreen({super.key});
@@ -148,7 +149,7 @@ class EventDetailsScreen extends StatelessWidget {
                   
                   // Proceed to Registration Button
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => Get.toNamed(AppRoute.registrationCategory),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.secondaryGreen,
                       foregroundColor: Colors.white,

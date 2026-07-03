@@ -287,7 +287,7 @@ class HomeScreen extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                               child: ElevatedButton(
-                                onPressed: () => Get.toNamed(AppRoute.eventDetails, arguments: featured),
+                                onPressed: () => Get.toNamed(AppRoute.registrationCategory),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.secondaryGreen,
                                   foregroundColor: Colors.white,

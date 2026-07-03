@@ -9,6 +9,7 @@ import '../../View/Screen/Auth/forgot_password/forgot_password_screen.dart';
 import '../../View/Screen/Auth/forgot_password/check_email_screen.dart';
 import '../../View/Screen/Dashboard/dashboard_screen.dart';
 import '../../View/Screen/Home/details/event_details_screen.dart';
+import '../../View/Screen/Home/registration/registration_category_screen.dart';
 
 class AppRoute {
   static const String splash = "/splash_screen";
@@ -21,6 +22,7 @@ class AppRoute {
   static const String parentProfile = "/parent_profile_screen";
   static const String home = "/home_screen";
   static const String eventDetails = "/event_details";
+  static const String registrationCategory = "/registration_category";
 
   static List<GetPage> routes = [
     GetPage(
@@ -62,6 +64,10 @@ class AppRoute {
     GetPage(
       name: eventDetails,
       page: () => const EventDetailsScreen(),
+    ),
+    GetPage(
+      name: registrationCategory,
+      page: () => const RegistrationCategoryScreen(),
     ),
   ];
 }
