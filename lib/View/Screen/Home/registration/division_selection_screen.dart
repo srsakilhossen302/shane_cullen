@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../Utils/AppColors/app_colors.dart';
 import 'controller/division_selection_controller.dart';
 import '../../../../Core/AppRoute/app_route.dart';
+import '../model/event_model.dart';
 
 class DivisionSelectionScreen extends StatelessWidget {
   const DivisionSelectionScreen({super.key});
@@ -11,6 +12,7 @@ class DivisionSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(DivisionSelectionController());
+    final EventModel event = Get.arguments as EventModel;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
@@ -200,9 +202,7 @@ class DivisionSelectionScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.h),
                   ElevatedButton(
-                    onPressed: () {
-                      controller.toggleContactType();
-                    },
+                    onPressed: () => Get.toNamed(AppRoute.fullContact, arguments: event),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: AppColors.secondaryGreen,

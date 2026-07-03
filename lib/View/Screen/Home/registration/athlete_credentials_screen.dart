@@ -391,7 +391,7 @@ class AthleteCredentialsScreen extends StatelessWidget {
                   
                   // Confirm Registration Button
                   ElevatedButton(
-                    onPressed: () => Get.toNamed(AppRoute.divisionSelection),
+                    onPressed: () => Get.toNamed(AppRoute.divisionSelection, arguments: event),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.secondaryGreen,
                       foregroundColor: Colors.white,

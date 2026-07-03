@@ -12,6 +12,7 @@ import '../../View/Screen/Home/details/event_details_screen.dart';
 import '../../View/Screen/Home/registration/registration_category_screen.dart';
 import '../../View/Screen/Home/registration/athlete_credentials_screen.dart';
 import '../../View/Screen/Home/registration/division_selection_screen.dart';
+import '../../View/Screen/Home/registration/full_contact_screen.dart';
 
 class AppRoute {
   static const String splash = "/splash_screen";
@@ -27,6 +28,7 @@ class AppRoute {
   static const String registrationCategory = "/registration_category";
   static const String athleteCredentials = "/athlete_credentials";
   static const String divisionSelection = "/division_selection";
+  static const String fullContact = "/full_contact";
 
   static List<GetPage> routes = [
     GetPage(
@@ -80,6 +82,10 @@ class AppRoute {
     GetPage(
       name: divisionSelection,
       page: () => const DivisionSelectionScreen(),
+    ),
+    GetPage(
+      name: fullContact,
+      page: () => const FullContactScreen(),
     ),
   ];
 }
