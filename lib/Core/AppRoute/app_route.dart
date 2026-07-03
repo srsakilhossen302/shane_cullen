@@ -7,7 +7,7 @@ import '../../View/Screen/Auth/register/applicant_profile_screen.dart';
 import '../../View/Screen/Auth/register/parent_profile_screen.dart';
 import '../../View/Screen/Auth/forgot_password/forgot_password_screen.dart';
 import '../../View/Screen/Auth/forgot_password/check_email_screen.dart';
-import '../../View/Screen/Home/home_screen.dart';
+import '../../View/Screen/Dashboard/dashboard_screen.dart';
 
 class AppRoute {
   static const String splash = "/splash_screen";
@@ -55,7 +55,7 @@ class AppRoute {
     ),
     GetPage(
       name: home,
-      page: () => const HomeScreen(),
+      page: () => const DashboardScreen(),
     ),
   ];
 }
