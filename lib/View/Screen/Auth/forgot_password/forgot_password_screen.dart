@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../Core/AppRoute/app_route.dart';
 import '../../../../Utils/AppColors/app_colors.dart';
 import 'controller/forgot_password_controller.dart';
 
@@ -10,6 +11,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ForgotPasswordController());
+    final emailController = TextEditingController();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC), // Soft premium off-white/light blue background
@@ -105,6 +107,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       // Email Field
                       _buildLabel("Email Address"),
                       _buildTextField(
+                        controller: emailController,
                         hintText: "you@example.com",
                         prefixIcon: Icons.mail_outline,
                       ),
@@ -124,7 +127,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                       Obx(() => ElevatedButton(
                         onPressed: controller.isLoading.value
                             ? null
-                            : () => controller.sendResetLink("email"),
+                            : () async {
+                                final email = emailController.text.trim();
+                                if (email.isNotEmpty) {
+                                  await controller.sendResetLink(email);
+                                  Get.toNamed(AppRoute.checkEmail, arguments: email);
+                                }
+                              },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.secondaryGreen,
                           foregroundColor: Colors.white,
@@ -205,6 +214,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   }
 
   Widget _buildTextField({
+    required TextEditingController controller,
     required String hintText,
     required IconData prefixIcon,
   }) {
@@ -215,6 +225,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(

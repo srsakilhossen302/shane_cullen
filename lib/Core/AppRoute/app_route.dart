@@ -4,6 +4,7 @@ import '../../View/Screen/Auth/login/login_screen.dart';
 import '../../View/Screen/Auth/login/sign_in_screen.dart';
 import '../../View/Screen/Auth/register/register_screen.dart';
 import '../../View/Screen/Auth/forgot_password/forgot_password_screen.dart';
+import '../../View/Screen/Auth/forgot_password/check_email_screen.dart';
 
 class AppRoute {
   static const String splash = "/splash_screen";
@@ -11,6 +12,7 @@ class AppRoute {
   static const String register = "/register_screen";
   static const String signIn = "/sign_in_screen";
   static const String forgotPassword = "/forgot_password_screen";
+  static const String checkEmail = "/check_email_screen";
 
   static List<GetPage> routes = [
     GetPage(
@@ -32,6 +34,10 @@ class AppRoute {
     GetPage(
       name: forgotPassword,
       page: () => const ForgotPasswordScreen(),
+    ),
+    GetPage(
+      name: checkEmail,
+      page: () => const CheckEmailScreen(),
     ),
   ];
 }
