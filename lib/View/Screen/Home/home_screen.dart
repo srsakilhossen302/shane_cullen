@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Utils/AppColors/app_colors.dart';
 import 'controller/home_controller.dart';
+import 'model/event_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -122,255 +123,266 @@ class HomeScreen extends StatelessWidget {
               )),
             ),
             
-            SizedBox(height: 24.h),
-            
-            // Featured Event Title Row
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Row(
+            Obx(() {
+              final featured = controller.featuredEvent;
+              if (featured == null) return const SizedBox.shrink();
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(4.r),
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFF97316), // Orange star circle
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.star,
-                      color: Colors.white,
-                      size: 16.r,
-                    ),
-                  ),
-                  SizedBox(width: 10.w),
-                  Text(
-                    "Featured Event",
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryNavy,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            
-            SizedBox(height: 16.h),
-            
-            // Featured Event Details Card
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.03),
-                      blurRadius: 15.r,
-                      offset: Offset(0, 5.h),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    // Featured Banner Image
-                    Stack(
+                  SizedBox(height: 24.h),
+                  
+                  // Featured Event Title Row
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16.r),
-                            topRight: Radius.circular(16.r),
+                        Container(
+                          padding: EdgeInsets.all(4.r),
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFF97316), // Orange star circle
+                            shape: BoxShape.circle,
                           ),
-                          child: Image.asset(
-                            "assets/images/martial_arts_sunset.png",
-                            width: double.infinity,
-                            height: 200.h,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        
-                        // Dark Gradient Overlay at the bottom
-                        Positioned.fill(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.black.withValues(alpha: 0.6),
-                                  Colors.transparent,
-                                ],
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                              ),
-                            ),
+                          child: Icon(
+                            Icons.star,
+                            color: Colors.white,
+                            size: 16.r,
                           ),
                         ),
-                        
-                        // "Featured" Tag
-                        Positioned(
-                          top: 12.h,
-                          right: 12.w,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF59E0B), // Golden badge
-                              borderRadius: BorderRadius.circular(20.r),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(Icons.star, color: AppColors.primaryNavy, size: 12.r),
-                                SizedBox(width: 4.w),
-                                Text(
-                                  "Featured",
-                                  style: TextStyle(
-                                    fontSize: 11.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.primaryNavy,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        
-                        // Overlaid Title & Details on Image
-                        Positioned(
-                          bottom: 12.h,
-                          left: 16.w,
-                          right: 16.w,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "National Championship 2026",
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(height: 8.h),
-                              Row(
-                                children: [
-                                  _buildImageBadge(Icons.calendar_today, "April 20-22, 2026"),
-                                  SizedBox(width: 8.w),
-                                  _buildImageBadge(Icons.location_on, "Dhaka, Bangladesh"),
-                                ],
-                              ),
-                            ],
+                        SizedBox(width: 10.w),
+                        Text(
+                          "Featured Event",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryNavy,
                           ),
                         ),
                       ],
                     ),
-                    
-                    // Register Now Action Button
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.secondaryGreen,
-                          foregroundColor: Colors.white,
-                          minimumSize: Size(double.infinity, 50.h),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  
+                  SizedBox(height: 16.h),
+                  
+                  // Featured Event Details Card
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.03),
+                            blurRadius: 15.r,
+                            offset: Offset(0, 5.h),
                           ),
-                          elevation: 0,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Register Now",
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          // Featured Banner Image
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(16.r),
+                                  topRight: Radius.circular(16.r),
+                                ),
+                                child: featured.imageUrl != null && featured.imageUrl!.isNotEmpty
+                                    ? Image.asset(
+                                        featured.imageUrl!,
+                                        width: double.infinity,
+                                        height: 200.h,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : SizedBox(
+                                        width: double.infinity,
+                                        height: 200.h,
+                                        child: const Icon(Icons.image),
+                                      ),
+                              ),
+                              
+                              // Dark Gradient Overlay at the bottom
+                              Positioned.fill(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.black.withValues(alpha: 0.6),
+                                        Colors.transparent,
+                                      ],
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              
+                              // "Featured" Tag
+                              Positioned(
+                                top: 12.h,
+                                right: 12.w,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF59E0B), // Golden badge
+                                    borderRadius: BorderRadius.circular(20.r),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(Icons.star, color: AppColors.primaryNavy, size: 12.r),
+                                      SizedBox(width: 4.w),
+                                      Text(
+                                        "Featured",
+                                        style: TextStyle(
+                                          fontSize: 11.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primaryNavy,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              
+                              // Overlaid Title & Details on Image
+                              Positioned(
+                                bottom: 12.h,
+                                left: 16.w,
+                                right: 16.w,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      featured.title ?? "",
+                                      style: TextStyle(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.h),
+                                    Row(
+                                      children: [
+                                        if (featured.date != null)
+                                          _buildImageBadge(Icons.calendar_today, featured.date!),
+                                        if (featured.date != null && featured.location != null)
+                                          SizedBox(width: 8.w),
+                                        if (featured.location != null)
+                                          _buildImageBadge(Icons.location_on, featured.location!),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          
+                          // Register Now Action Button
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.secondaryGreen,
+                                foregroundColor: Colors.white,
+                                minimumSize: Size(double.infinity, 50.h),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                elevation: 0,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Register Now",
+                                    style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(width: 8.w),
+                                  Icon(Icons.arrow_forward, size: 16.r),
+                                ],
                               ),
                             ),
-                            SizedBox(width: 8.w),
-                            Icon(Icons.arrow_forward, size: 16.r),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
+                ],
+              );
+            }),
             
             SizedBox(height: 24.h),
             
-            // All Events Header & Badge Row
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // All Events Section (Header & List)
+            Obx(() {
+              final filtered = controller.filteredEvents;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "All Events",
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryNavy,
+                  // All Events Header & Badge Row
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "All Events",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryNavy,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF1F5F9),
+                            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                          child: Text(
+                            "${filtered.length} found",
+                            style: TextStyle(
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF1F5F9),
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    child: Text(
-                      "4 found",
-                      style: TextStyle(
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.textMuted,
-                      ),
-                    ),
+                  
+                  SizedBox(height: 16.h),
+                  
+                  // List of All Events
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: filtered.isEmpty
+                        ? Container(
+                            height: 150.h,
+                            alignment: Alignment.center,
+                            child: Text(
+                              "No events found",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: AppColors.textMuted,
+                              ),
+                            ),
+                          )
+                        : Column(
+                            children: filtered.map((event) => _buildEventItem(event)).toList(),
+                          ),
                   ),
                 ],
-              ),
-            ),
-            
-            SizedBox(height: 16.h),
-            
-            // List of All Events
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Column(
-                children: [
-                  _buildEventItem(
-                    imageUrl: "assets/images/martial_arts_sunset.png",
-                    title: "National Championship",
-                    date: "April 20-22, 2026",
-                    location: "Dhaka, Bangladesh",
-                    fee: "BDT 2000",
-                    prize: "BDT 50,000",
-                    isOpen: false,
-                  ),
-                  _buildEventItem(
-                    imageUrl: "assets/images/soccer_balls.png",
-                    title: "City Open",
-                    date: "April 25-26, 2026",
-                    location: "Chittagong, Bangladesh",
-                    fee: "BDT 1500",
-                    prize: "BDT 25,000",
-                    isOpen: true,
-                  ),
-                  _buildEventItem(
-                    imageUrl: "assets/images/swimmer.png",
-                    title: "Inter-University",
-                    date: "May 5-7, 2026",
-                    location: "Sylhet, Bangladesh",
-                    fee: "BDT 1000",
-                    prize: "BDT 30,000",
-                    isOpen: true,
-                  ),
-                ],
-              ),
-            ),
+              );
+            }),
             
             SizedBox(height: 24.h),
           ],
@@ -433,15 +445,15 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEventItem({
-    required String imageUrl,
-    required String title,
-    required String date,
-    required String location,
-    required String fee,
-    required String prize,
-    required bool isOpen,
-  }) {
+  Widget _buildEventItem(EventModel event) {
+    final imageUrl = event.imageUrl ?? "";
+    final title = event.title ?? "";
+    final date = event.date ?? "";
+    final location = event.location ?? "";
+    final fee = event.fee ?? "";
+    final prize = event.prize ?? "";
+    final isOpen = event.isOpen ?? false;
+
     return Container(
       margin: EdgeInsets.only(bottom: 16.h),
       padding: EdgeInsets.all(12.r),
@@ -461,12 +473,18 @@ class HomeScreen extends StatelessWidget {
           // Event Thumbnail Image
           ClipRRect(
             borderRadius: BorderRadius.circular(12.r),
-            child: Image.asset(
-              imageUrl,
-              width: 80.w,
-              height: 80.w,
-              fit: BoxFit.cover,
-            ),
+            child: imageUrl.isNotEmpty
+                ? Image.asset(
+                    imageUrl,
+                    width: 80.w,
+                    height: 80.w,
+                    fit: BoxFit.cover,
+                  )
+                : SizedBox(
+                    width: 80.w,
+                    height: 80.w,
+                    child: const Icon(Icons.image),
+                  ),
           ),
           SizedBox(width: 16.w),
           
