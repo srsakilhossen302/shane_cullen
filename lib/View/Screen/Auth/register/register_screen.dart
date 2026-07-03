@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../Core/AppRoute/app_route.dart';
 import '../../../../Utils/AppColors/app_colors.dart';
 import 'controller/register_controller.dart';
 
@@ -185,10 +186,8 @@ class RegisterScreen extends StatelessWidget {
                       SizedBox(height: 32.h),
                       
                       // Create Account Button
-                      Obx(() => ElevatedButton(
-                        onPressed: controller.isLoading.value
-                            ? null
-                            : () => controller.register("name", "email", "pass", "confirm"),
+                      ElevatedButton(
+                        onPressed: () => Get.toNamed(AppRoute.applicantProfile),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.secondaryGreen,
                           foregroundColor: Colors.white,
@@ -198,23 +197,21 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           elevation: 0,
                         ),
-                        child: controller.isLoading.value
-                            ? const CircularProgressIndicator(color: Colors.white)
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Create Account",
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(width: 8.w),
-                                  Icon(Icons.arrow_forward, size: 18.r),
-                                ],
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Create Account",
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
                               ),
-                      )),
+                            ),
+                            SizedBox(width: 8.w),
+                            Icon(Icons.arrow_forward, size: 18.r),
+                          ],
+                        ),
+                      ),
                       
                       SizedBox(height: 32.h),
                       
