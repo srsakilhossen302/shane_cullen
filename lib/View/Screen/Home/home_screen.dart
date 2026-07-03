@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Utils/AppColors/app_colors.dart';
 import 'controller/home_controller.dart';
 import 'model/event_model.dart';
+import '../../../Core/AppRoute/app_route.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -164,153 +165,156 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 16.h),
                   
                   // Featured Event Details Card
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.w),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.03),
-                            blurRadius: 15.r,
-                            offset: Offset(0, 5.h),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          // Featured Banner Image
-                          Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(16.r),
-                                  topRight: Radius.circular(16.r),
+                  GestureDetector(
+                    onTap: () => Get.toNamed(AppRoute.eventDetails, arguments: featured),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.w),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16.r),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.03),
+                              blurRadius: 15.r,
+                              offset: Offset(0, 5.h),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            // Featured Banner Image
+                            Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(16.r),
+                                    topRight: Radius.circular(16.r),
+                                  ),
+                                  child: featured.imageUrl != null && featured.imageUrl!.isNotEmpty
+                                      ? Image.asset(
+                                          featured.imageUrl!,
+                                          width: double.infinity,
+                                          height: 200.h,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : SizedBox(
+                                          width: double.infinity,
+                                          height: 200.h,
+                                          child: const Icon(Icons.image),
+                                        ),
                                 ),
-                                child: featured.imageUrl != null && featured.imageUrl!.isNotEmpty
-                                    ? Image.asset(
-                                        featured.imageUrl!,
-                                        width: double.infinity,
-                                        height: 200.h,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : SizedBox(
-                                        width: double.infinity,
-                                        height: 200.h,
-                                        child: const Icon(Icons.image),
+                                
+                                // Dark Gradient Overlay at the bottom
+                                Positioned.fill(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.black.withValues(alpha: 0.6),
+                                          Colors.transparent,
+                                        ],
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
                                       ),
-                              ),
-                              
-                              // Dark Gradient Overlay at the bottom
-                              Positioned.fill(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Colors.black.withValues(alpha: 0.6),
-                                        Colors.transparent,
-                                      ],
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.topCenter,
                                     ),
                                   ),
                                 ),
-                              ),
-                              
-                              // "Featured" Tag
-                              Positioned(
-                                top: 12.h,
-                                right: 12.w,
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFF59E0B), // Golden badge
-                                    borderRadius: BorderRadius.circular(20.r),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(Icons.star, color: AppColors.primaryNavy, size: 12.r),
-                                      SizedBox(width: 4.w),
-                                      Text(
-                                        "Featured",
-                                        style: TextStyle(
-                                          fontSize: 11.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.primaryNavy,
+                                
+                                // "Featured" Tag
+                                Positioned(
+                                  top: 12.h,
+                                  right: 12.w,
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFF59E0B), // Golden badge
+                                      borderRadius: BorderRadius.circular(20.r),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(Icons.star, color: AppColors.primaryNavy, size: 12.r),
+                                        SizedBox(width: 4.w),
+                                        Text(
+                                          "Featured",
+                                          style: TextStyle(
+                                            fontSize: 11.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.primaryNavy,
+                                          ),
                                         ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                
+                                // Overlaid Title & Details on Image
+                                Positioned(
+                                  bottom: 12.h,
+                                  left: 16.w,
+                                  right: 16.w,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        featured.title ?? "",
+                                        style: TextStyle(
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 8.h),
+                                      Row(
+                                        children: [
+                                          if (featured.date != null)
+                                            _buildImageBadge(Icons.calendar_today, featured.date!),
+                                          if (featured.date != null && featured.location != null)
+                                            SizedBox(width: 8.w),
+                                          if (featured.location != null)
+                                            _buildImageBadge(Icons.location_on, featured.location!),
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ),
-                              ),
-                              
-                              // Overlaid Title & Details on Image
-                              Positioned(
-                                bottom: 12.h,
-                                left: 16.w,
-                                right: 16.w,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              ],
+                            ),
+                            
+                            // Register Now Action Button
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                              child: ElevatedButton(
+                                onPressed: () => Get.toNamed(AppRoute.eventDetails, arguments: featured),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.secondaryGreen,
+                                  foregroundColor: Colors.white,
+                                  minimumSize: Size(double.infinity, 50.h),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                  ),
+                                  elevation: 0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      featured.title ?? "",
+                                      "Register Now",
                                       style: TextStyle(
-                                        fontSize: 20.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
                                       ),
                                     ),
-                                    SizedBox(height: 8.h),
-                                    Row(
-                                      children: [
-                                        if (featured.date != null)
-                                          _buildImageBadge(Icons.calendar_today, featured.date!),
-                                        if (featured.date != null && featured.location != null)
-                                          SizedBox(width: 8.w),
-                                        if (featured.location != null)
-                                          _buildImageBadge(Icons.location_on, featured.location!),
-                                      ],
-                                    ),
+                                    SizedBox(width: 8.w),
+                                    Icon(Icons.arrow_forward, size: 16.r),
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                          
-                          // Register Now Action Button
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.secondaryGreen,
-                                foregroundColor: Colors.white,
-                                minimumSize: Size(double.infinity, 50.h),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.r),
-                                ),
-                                elevation: 0,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Register Now",
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(width: 8.w),
-                                  Icon(Icons.arrow_forward, size: 16.r),
-                                ],
-                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -454,169 +458,172 @@ class HomeScreen extends StatelessWidget {
     final prize = event.prize ?? "";
     final isOpen = event.isOpen ?? false;
 
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.all(12.r),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
-            blurRadius: 10.r,
-            offset: Offset(0, 4.h),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          // Event Thumbnail Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.r),
-            child: imageUrl.isNotEmpty
-                ? Image.asset(
-                    imageUrl,
-                    width: 80.w,
-                    height: 80.w,
-                    fit: BoxFit.cover,
-                  )
-                : SizedBox(
-                    width: 80.w,
-                    height: 80.w,
-                    child: const Icon(Icons.image),
-                  ),
-          ),
-          SizedBox(width: 16.w),
-          
-          // Event Details Block
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primaryNavy,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    if (isOpen)
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDCFCE7),
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child: Text(
-                          "Open",
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF15803D),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-                SizedBox(height: 6.h),
-                Row(
-                  children: [
-                    Icon(Icons.calendar_today, color: Colors.blue.shade600, size: 12.r),
-                    SizedBox(width: 6.w),
-                    Text(
-                      date,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: AppColors.textMuted,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 4.h),
-                Row(
-                  children: [
-                    Icon(Icons.location_on, color: Colors.blue.shade600, size: 12.r),
-                    SizedBox(width: 6.w),
-                    Text(
-                      location,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: AppColors.textMuted,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 8.h),
-                Container(
-                  width: double.infinity,
-                  height: 1.h,
-                  color: const Color(0xFFF1F5F9),
-                ),
-                SizedBox(height: 8.h),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Fee",
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            color: AppColors.textMuted,
-                          ),
-                        ),
-                        Text(
-                          fee,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF2563EB),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 24.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Prize",
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            color: AppColors.textMuted,
-                          ),
-                        ),
-                        Text(
-                          prize,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFFD97706),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+    return GestureDetector(
+      onTap: () => Get.toNamed(AppRoute.eventDetails, arguments: event),
+      child: Container(
+        margin: EdgeInsets.only(bottom: 16.h),
+        padding: EdgeInsets.all(12.r),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 10.r,
+              offset: Offset(0, 4.h),
             ),
-          ),
-          
-          SizedBox(width: 4.w),
-          Icon(
-            Icons.chevron_right,
-            color: AppColors.textMuted.withValues(alpha: 0.6),
-            size: 20.r,
-          ),
-        ],
+          ],
+        ),
+        child: Row(
+          children: [
+            // Event Thumbnail Image
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.r),
+              child: imageUrl.isNotEmpty
+                  ? Image.asset(
+                      imageUrl,
+                      width: 80.w,
+                      height: 80.w,
+                      fit: BoxFit.cover,
+                    )
+                  : SizedBox(
+                      width: 80.w,
+                      height: 80.w,
+                      child: const Icon(Icons.image),
+                    ),
+            ),
+            SizedBox(width: 16.w),
+            
+            // Event Details Block
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryNavy,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      if (isOpen)
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Text(
+                            "Open",
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF15803D),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  SizedBox(height: 6.h),
+                  Row(
+                    children: [
+                      Icon(Icons.calendar_today, color: Colors.blue.shade600, size: 12.r),
+                      SizedBox(width: 6.w),
+                      Text(
+                        date,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: AppColors.textMuted,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4.h),
+                  Row(
+                    children: [
+                      Icon(Icons.location_on, color: Colors.blue.shade600, size: 12.r),
+                      SizedBox(width: 6.w),
+                      Text(
+                        location,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: AppColors.textMuted,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8.h),
+                  Container(
+                    width: double.infinity,
+                    height: 1.h,
+                    color: const Color(0xFFF1F5F9),
+                  ),
+                  SizedBox(height: 8.h),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Fee",
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                          Text(
+                            fee,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF2563EB),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 24.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Prize",
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                          Text(
+                            prize,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFFD97706),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            
+            SizedBox(width: 4.w),
+            Icon(
+              Icons.chevron_right,
+              color: AppColors.textMuted.withValues(alpha: 0.6),
+              size: 20.r,
+            ),
+          ],
+        ),
       ),
     );
   }

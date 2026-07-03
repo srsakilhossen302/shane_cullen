@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Utils/AppColors/app_colors.dart';
 import '../Home/controller/home_controller.dart';
 import '../Home/model/event_model.dart';
+import '../../../Core/AppRoute/app_route.dart';
 
 class CampsScreen extends StatelessWidget {
   const CampsScreen({super.key});
@@ -103,165 +104,168 @@ class CampsScreen extends StatelessWidget {
     final prize = event.prize ?? "";
     final isOpen = event.isOpen ?? false;
 
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.all(12.r),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
-            blurRadius: 10.r,
-            offset: Offset(0, 4.h),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.r),
-            child: imageUrl.isNotEmpty
-                ? Image.asset(
-                    imageUrl,
-                    width: 80.w,
-                    height: 80.w,
-                    fit: BoxFit.cover,
-                  )
-                : SizedBox(
-                    width: 80.w,
-                    height: 80.w,
-                    child: const Icon(Icons.image),
-                  ),
-          ),
-          SizedBox(width: 16.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primaryNavy,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    if (isOpen)
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDCFCE7),
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child: Text(
-                          "Open",
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF15803D),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-                SizedBox(height: 6.h),
-                Row(
-                  children: [
-                    Icon(Icons.calendar_today, color: Colors.blue.shade600, size: 12.r),
-                    SizedBox(width: 6.w),
-                    Text(
-                      date,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: AppColors.textMuted,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 4.h),
-                Row(
-                  children: [
-                    Icon(Icons.location_on, color: Colors.blue.shade600, size: 12.r),
-                    SizedBox(width: 6.w),
-                    Text(
-                      location,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: AppColors.textMuted,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 8.h),
-                Container(
-                  width: double.infinity,
-                  height: 1.h,
-                  color: const Color(0xFFF1F5F9),
-                ),
-                SizedBox(height: 8.h),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Fee",
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            color: AppColors.textMuted,
-                          ),
-                        ),
-                        Text(
-                          fee,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF2563EB),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 24.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Prize",
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            color: AppColors.textMuted,
-                          ),
-                        ),
-                        Text(
-                          prize,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFFD97706),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+    return GestureDetector(
+      onTap: () => Get.toNamed(AppRoute.eventDetails, arguments: event),
+      child: Container(
+        margin: EdgeInsets.only(bottom: 16.h),
+        padding: EdgeInsets.all(12.r),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 10.r,
+              offset: Offset(0, 4.h),
             ),
-          ),
-          SizedBox(width: 4.w),
-          Icon(
-            Icons.chevron_right,
-            color: AppColors.textMuted.withValues(alpha: 0.6),
-            size: 20.r,
-          ),
-        ],
+          ],
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.r),
+              child: imageUrl.isNotEmpty
+                  ? Image.asset(
+                      imageUrl,
+                      width: 80.w,
+                      height: 80.w,
+                      fit: BoxFit.cover,
+                    )
+                  : SizedBox(
+                      width: 80.w,
+                      height: 80.w,
+                      child: const Icon(Icons.image),
+                    ),
+            ),
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryNavy,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      if (isOpen)
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Text(
+                            "Open",
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF15803D),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  SizedBox(height: 6.h),
+                  Row(
+                    children: [
+                      Icon(Icons.calendar_today, color: Colors.blue.shade600, size: 12.r),
+                      SizedBox(width: 6.w),
+                      Text(
+                        date,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: AppColors.textMuted,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4.h),
+                  Row(
+                    children: [
+                      Icon(Icons.location_on, color: Colors.blue.shade600, size: 12.r),
+                      SizedBox(width: 6.w),
+                      Text(
+                        location,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: AppColors.textMuted,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8.h),
+                  Container(
+                    width: double.infinity,
+                    height: 1.h,
+                    color: const Color(0xFFF1F5F9),
+                  ),
+                  SizedBox(height: 8.h),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Fee",
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                          Text(
+                            fee,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF2563EB),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 24.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Prize",
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                          Text(
+                            prize,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFFD97706),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 4.w),
+            Icon(
+              Icons.chevron_right,
+              color: AppColors.textMuted.withValues(alpha: 0.6),
+              size: 20.r,
+            ),
+          ],
+        ),
       ),
     );
   }
