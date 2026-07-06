@@ -15,6 +15,7 @@ import '../../View/Screen/Home/registration/division_selection_screen.dart';
 import '../../View/Screen/Home/registration/full_contact_screen.dart';
 import '../../View/Screen/Home/registration/non_contact_registration_screen.dart';
 import '../../View/Screen/Home/registration/camp_registration_screen.dart';
+import '../../View/Screen/Home/registration/review_registration_screen.dart';
 
 class AppRoute {
   static const String splash = "/splash_screen";
@@ -33,6 +34,7 @@ class AppRoute {
   static const String fullContact = "/full_contact";
   static const String nonContact = "/non_contact";
   static const String campRegistration = "/camp_registration";
+  static const String reviewRegistration = "/review_registration";
 
   static List<GetPage> routes = [
     GetPage(
@@ -98,6 +100,10 @@ class AppRoute {
     GetPage(
       name: campRegistration,
       page: () => const CampRegistrationScreen(),
+    ),
+    GetPage(
+      name: reviewRegistration,
+      page: () => const ReviewRegistrationScreen(),
     ),
   ];
 }
