@@ -80,7 +80,7 @@ class FullContactScreen extends StatelessWidget {
                   progress: 0.35,
                   isSelected: controller.selectedDivision.value == "M1",
                   onTap: () => controller.selectDivision("M1"),
-                  onRegister: () => _showSuccessDialog(context, "Division M1 (Lightweight)"),
+                  onRegister: () => Get.toNamed(AppRoute.nonContact, arguments: event),
                 )),
             SizedBox(height: 12.h),
             Obx(() => _buildDivisionCard(
@@ -90,7 +90,7 @@ class FullContactScreen extends StatelessWidget {
                   progress: 0.80,
                   isSelected: controller.selectedDivision.value == "M2",
                   onTap: () => controller.selectDivision("M2"),
-                  onRegister: () => _showSuccessDialog(context, "Division M2 (Middleweight)"),
+                  onRegister: () => Get.toNamed(AppRoute.nonContact, arguments: event),
                 )),
             SizedBox(height: 12.h),
             Obx(() => _buildDivisionCard(
@@ -100,7 +100,7 @@ class FullContactScreen extends StatelessWidget {
                   progress: 0.20,
                   isSelected: controller.selectedDivision.value == "M3",
                   onTap: () => controller.selectDivision("M3"),
-                  onRegister: () => _showSuccessDialog(context, "Division M3 (Heavyweight)"),
+                  onRegister: () => Get.toNamed(AppRoute.nonContact, arguments: event),
                 )),
 
             SizedBox(height: 24.h),
@@ -116,7 +116,7 @@ class FullContactScreen extends StatelessWidget {
                   progress: 0.35,
                   isSelected: controller.selectedDivision.value == "F1",
                   onTap: () => controller.selectDivision("F1"),
-                  onRegister: () => _showSuccessDialog(context, "Division F1 (Lightweight)"),
+                  onRegister: () => Get.toNamed(AppRoute.nonContact, arguments: event),
                 )),
             SizedBox(height: 12.h),
             Obx(() => _buildDivisionCard(
@@ -126,7 +126,7 @@ class FullContactScreen extends StatelessWidget {
                   progress: 0.15,
                   isSelected: controller.selectedDivision.value == "F2",
                   onTap: () => controller.selectDivision("F2"),
-                  onRegister: () => _showSuccessDialog(context, "Division F2 (Middleweight)"),
+                  onRegister: () => Get.toNamed(AppRoute.nonContact, arguments: event),
                 )),
 
             SizedBox(height: 28.h),
@@ -326,80 +326,5 @@ class FullContactScreen extends StatelessWidget {
     );
   }
 
-  void _showSuccessDialog(BuildContext context, String divisionName) {
-    Get.dialog(
-      Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
-        ),
-        child: Container(
-          padding: EdgeInsets.all(24.r),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 60.w,
-                height: 60.w,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFDCFCE7),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.check_circle,
-                  color: const Color(0xFF15803D),
-                  size: 40.r,
-                ),
-              ),
-              SizedBox(height: 20.h),
-              Text(
-                "Registration Success!",
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryNavy,
-                ),
-              ),
-              SizedBox(height: 10.h),
-              Text(
-                "You have successfully registered for full contact $divisionName.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: AppColors.textMuted,
-                ),
-              ),
-              SizedBox(height: 24.h),
-              ElevatedButton(
-                onPressed: () {
-                  Get.close(1); // close dialog
-                  Get.offAllNamed(AppRoute.home); // go to main screen
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.secondaryGreen,
-                  foregroundColor: Colors.white,
-                  minimumSize: Size(double.infinity, 45.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  elevation: 0,
-                ),
-                child: Text(
-                  "Back to Home",
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      barrierDismissible: false,
-    );
-  }
+
 }
