@@ -11,6 +11,7 @@ class ReviewRegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ReviewRegistrationController());
+    final event = Get.arguments;
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
@@ -370,7 +371,7 @@ class ReviewRegistrationScreen extends StatelessWidget {
                       margin: EdgeInsets.all(16.r),
                     );
                   } else {
-                    _showSuccessDialog(context);
+                    Get.toNamed(AppRoute.payment, arguments: event);
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -448,82 +449,7 @@ class ReviewRegistrationScreen extends StatelessWidget {
 
 
 
-  void _showSuccessDialog(BuildContext context) {
-    Get.dialog(
-      Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
-        ),
-        child: Container(
-          padding: EdgeInsets.all(24.r),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 60.w,
-                height: 60.w,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFDCFCE7),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.check_circle,
-                  color: const Color(0xFF15803D),
-                  size: 40.r,
-                ),
-              ),
-              SizedBox(height: 20.h),
-              Text(
-                "Registration Success!",
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryNavy,
-                ),
-              ),
-              SizedBox(height: 10.h),
-              Text(
-                "Your registration and payment have been processed successfully.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: AppColors.textMuted,
-                ),
-              ),
-              SizedBox(height: 24.h),
-              ElevatedButton(
-                onPressed: () {
-                  Get.close(1); // close dialog
-                  Get.offAllNamed(AppRoute.home); // go to main screen
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.secondaryGreen,
-                  foregroundColor: Colors.white,
-                  minimumSize: Size(double.infinity, 45.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  elevation: 0,
-                ),
-                child: Text(
-                  "Back to Home",
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      barrierDismissible: false,
-    );
-  }
+
 }
 
 class SignaturePainter extends CustomPainter {

@@ -17,6 +17,8 @@ import '../../View/Screen/Home/registration/non_contact_registration_screen.dart
 import '../../View/Screen/Home/registration/camp_registration_screen.dart';
 import '../../View/Screen/Home/registration/review_registration_screen.dart';
 import '../../View/Screen/Home/registration/competitor_indemnity_screen.dart';
+import '../../View/Screen/Home/registration/payment_screen.dart';
+import '../../View/Screen/Home/registration/payment_success_screen.dart';
 
 class AppRoute {
   static const String splash = "/splash_screen";
@@ -37,6 +39,8 @@ class AppRoute {
   static const String campRegistration = "/camp_registration";
   static const String reviewRegistration = "/review_registration";
   static const String competitorIndemnity = "/competitor_indemnity";
+  static const String payment = "/payment";
+  static const String paymentSuccess = "/payment_success";
 
   static List<GetPage> routes = [
     GetPage(
@@ -110,6 +114,14 @@ class AppRoute {
     GetPage(
       name: competitorIndemnity,
       page: () => const CompetitorIndemnityScreen(),
+    ),
+    GetPage(
+      name: payment,
+      page: () => const PaymentScreen(),
+    ),
+    GetPage(
+      name: paymentSuccess,
+      page: () => const PaymentSuccessScreen(),
     ),
   ];
 }
