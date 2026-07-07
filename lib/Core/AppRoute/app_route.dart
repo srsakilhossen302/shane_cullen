@@ -19,6 +19,9 @@ import '../../View/Screen/Home/registration/review_registration_screen.dart';
 import '../../View/Screen/Home/registration/competitor_indemnity_screen.dart';
 import '../../View/Screen/Home/registration/payment_screen.dart';
 import '../../View/Screen/Home/registration/payment_success_screen.dart';
+import '../../View/Screen/Home/registration/match_officials_screen.dart';
+import '../../View/Screen/Profile/competition_history_screen.dart';
+import '../../View/Screen/Profile/tournament_performance_screen.dart';
 
 class AppRoute {
   static const String splash = "/splash_screen";
@@ -41,6 +44,9 @@ class AppRoute {
   static const String competitorIndemnity = "/competitor_indemnity";
   static const String payment = "/payment";
   static const String paymentSuccess = "/payment_success";
+  static const String matchOfficials = "/match_officials";
+  static const String competitionHistory = "/competition_history";
+  static const String tournamentPerformance = "/tournament_performance";
 
   static List<GetPage> routes = [
     GetPage(
@@ -122,6 +128,18 @@ class AppRoute {
     GetPage(
       name: paymentSuccess,
       page: () => const PaymentSuccessScreen(),
+    ),
+    GetPage(
+      name: matchOfficials,
+      page: () => const MatchOfficialsScreen(),
+    ),
+    GetPage(
+      name: competitionHistory,
+      page: () => const CompetitionHistoryScreen(),
+    ),
+    GetPage(
+      name: tournamentPerformance,
+      page: () => const TournamentPerformanceScreen(),
     ),
   ];
 }

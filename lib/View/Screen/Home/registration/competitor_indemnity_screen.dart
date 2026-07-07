@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../Utils/AppColors/app_colors.dart';
 import 'controller/review_registration_controller.dart';
+import 'controller/match_officials_controller.dart';
 import 'review_registration_screen.dart'; // to share SignaturePainter if needed, or define locally
 
 class CompetitorIndemnityScreen extends StatelessWidget {
@@ -10,8 +11,10 @@ class CompetitorIndemnityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Find the existing ReviewRegistrationController
-    final controller = Get.find<ReviewRegistrationController>();
+    // Find the existing controller dynamically based on registration screen type
+    final dynamic controller = Get.isRegistered<MatchOfficialsController>()
+        ? Get.find<MatchOfficialsController>()
+        : Get.find<ReviewRegistrationController>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -222,22 +225,59 @@ class CompetitorIndemnityScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 8.h),
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF8FAFC),
-                        border: Border.all(color: const Color(0xFFE2E8F0)),
-                        borderRadius: BorderRadius.circular(10.r),
+                     GestureDetector(
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2101),
+                          builder: (context, child) {
+                            return Theme(
+                              data: Theme.of(context).copyWith(
+                                colorScheme: const ColorScheme.light(
+                                  primary: AppColors.secondaryGreen,
+                                  onPrimary: Colors.white,
+                                  onSurface: AppColors.primaryNavy,
+                                ),
+                              ),
+                              child: child!,
+                            );
+                          },
+                        );
+                        if (pickedDate != null) {
+                          String formattedDate =
+                              "${pickedDate.day.toString().padLeft(2, '0')}/${pickedDate.month.toString().padLeft(2, '0')}/${pickedDate.year}";
+                          controller.signatureDate.value = formattedDate;
+                        }
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF8FAFC),
+                          border: Border.all(color: const Color(0xFFE2E8F0)),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Obx(() => Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  controller.signatureDate.value,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: AppColors.primaryNavy,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.calendar_today_outlined,
+                                  size: 16.r,
+                                  color: AppColors.textMuted,
+                                ),
+                              ],
+                            )),
                       ),
-                      child: Obx(() => Text(
-                            controller.signatureDate.value,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: AppColors.primaryNavy,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          )),
                     ),
                     SizedBox(height: 30.h),
 

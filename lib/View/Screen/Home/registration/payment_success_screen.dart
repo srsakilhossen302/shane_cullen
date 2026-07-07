@@ -155,7 +155,7 @@ class PaymentSuccessScreen extends StatelessWidget {
 
               // Action Button: View My Tournaments
               ElevatedButton(
-                onPressed: () => Get.offAllNamed(AppRoute.home),
+                onPressed: () => Get.toNamed(AppRoute.matchOfficials),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.secondaryGreen,
                   foregroundColor: Colors.white,
