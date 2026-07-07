@@ -306,7 +306,7 @@ class ReviewRegistrationScreen extends StatelessWidget {
                           
                           // Document selection button
                           GestureDetector(
-                            onTap: () => _openSignatureDialog(context, controller),
+                            onTap: () => Get.toNamed(AppRoute.competitorIndemnity),
                             child: Container(
                               width: double.infinity,
                               padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
@@ -446,84 +446,7 @@ class ReviewRegistrationScreen extends StatelessWidget {
     );
   }
 
-  void _openSignatureDialog(BuildContext context, ReviewRegistrationController controller) {
-    Get.dialog(
-      Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
-        ),
-        child: Container(
-          padding: EdgeInsets.all(20.r),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "COMPETITOR INDEMNITY AGREEMENT",
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryNavy,
-                ),
-              ),
-              SizedBox(height: 16.h),
-              Container(
-                constraints: BoxConstraints(maxHeight: 200.h),
-                decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFE2E8F0)),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.all(12.r),
-                  child: Text(
-                    "I hereby agree and covenant that I am entering this tournament voluntarily. "
-                    "I assume all risk of injuries, damages, or losses resulting from my participation. "
-                    "I release and discharge the organizers, officials, masters, teachers, and dojo affiliates "
-                    "from any and all claims, demands, actions, or causes of actions arising out of my participation in this event.",
-                    style: TextStyle(fontSize: 12.sp, color: Colors.black87, height: 1.4),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.h),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () => Get.back(),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.grey,
-                        side: const BorderSide(color: Colors.grey),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                      ),
-                      child: const Text("CANCEL"),
-                    ),
-                  ),
-                  SizedBox(width: 12.w),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        controller.signIndemnity();
-                        Get.back();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.secondaryGreen,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                      ),
-                      child: const Text("AGREE & SIGN"),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+
 
   void _showSuccessDialog(BuildContext context) {
     Get.dialog(
@@ -601,4 +524,27 @@ class ReviewRegistrationScreen extends StatelessWidget {
       barrierDismissible: false,
     );
   }
+}
+
+class SignaturePainter extends CustomPainter {
+  final List<Offset?> points;
+
+  SignaturePainter(this.points);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = AppColors.primaryNavy
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 3.0;
+
+    for (int i = 0; i < points.length - 1; i++) {
+      if (points[i] != null && points[i + 1] != null) {
+        canvas.drawLine(points[i]!, points[i + 1]!, paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(SignaturePainter oldDelegate) => true;
 }
