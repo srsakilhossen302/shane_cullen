@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../Home/home_screen.dart';
 import '../../Tournaments/tournaments_screen.dart';
-import '../../Results/results_screen.dart';
 import '../../Camps/camps_screen.dart';
 import '../../Profile/profile_screen.dart';
+import '../../Profile/competition_history_screen.dart';
 
 class DashboardController extends GetxController {
   var currentIndex = 0.obs;
@@ -12,7 +12,7 @@ class DashboardController extends GetxController {
   final List<Widget> screens = [
     const HomeScreen(),
     const TournamentsScreen(),
-    const ResultsScreen(),
+    const CompetitionHistoryScreen(),
     const CampsScreen(),
     const ProfileScreen(),
   ];
