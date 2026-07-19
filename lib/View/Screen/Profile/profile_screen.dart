@@ -401,7 +401,7 @@ class ProfileScreen extends StatelessWidget {
                     backgroundColor: const Color(0xFFFAF5FF), // Light purple
                     iconColor: const Color(0xFFA855F7),
                     onTap: () {
-                      Get.snackbar("My Teams", "Viewing teams features is coming soon!");
+                      Get.toNamed(AppRoute.teams);
                     },
                   ),
                   _buildQuickActionCard(

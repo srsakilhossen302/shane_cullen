@@ -27,6 +27,7 @@ import '../../View/Screen/Home/registration/payment_success_screen.dart';
 import '../../View/Screen/Home/registration/match_officials_screen.dart';
 import '../../View/Screen/Profile/competition_history_screen.dart';
 import '../../View/Screen/Profile/tournament_performance_screen.dart';
+import '../../View/Screen/Profile/teams_screen.dart';
 
 class AppRoute {
   static const String splash = "/splash_screen";
@@ -57,6 +58,7 @@ class AppRoute {
   static const String matchOfficials = "/match_officials";
   static const String competitionHistory = "/competition_history";
   static const String tournamentPerformance = "/tournament_performance";
+  static const String teams = "/teams_screen";
 
   static List<GetPage> routes = [
     GetPage(
@@ -170,6 +172,10 @@ class AppRoute {
     GetPage(
       name: tournamentPerformance,
       page: () => const TournamentPerformanceScreen(),
+    ),
+    GetPage(
+      name: teams,
+      page: () => const TeamsScreen(),
     ),
   ];
 }
