@@ -23,14 +23,16 @@ class CompetitionHistoryScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Back Button
-                GestureDetector(
-                  onTap: () => Get.back(),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
+                if (Navigator.canPop(context)) ...[
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                SizedBox(height: 16.h),
+                  SizedBox(height: 16.h),
+                ],
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

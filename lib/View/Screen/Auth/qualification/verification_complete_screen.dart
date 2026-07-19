@@ -63,10 +63,7 @@ class VerificationCompleteScreen extends StatelessWidget {
         ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.h),
-          child: Container(
-            color: const Color(0xFFF1F5F9),
-            height: 1.h,
-          ),
+          child: Container(color: const Color(0xFFF1F5F9), height: 1.h),
         ),
       ),
       body: SafeArea(
@@ -76,7 +73,7 @@ class VerificationCompleteScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 16.h),
-              
+
               // 1. Concentric Green Checkmark Circle
               Center(
                 child: Container(
@@ -135,218 +132,204 @@ class VerificationCompleteScreen extends StatelessWidget {
               ),
               SizedBox(height: 48.h),
 
-              // 3. APEX LEAGUE OFFICIAL ID Card
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16.r),
-                  border: Border.all(
-                    color: const Color(0xFFE2E8F0),
-                    width: 1.w,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.02),
-                      blurRadius: 10.r,
-                      offset: const Offset(0, 4),
+              // 3. APEX LEAGUE OFFICIAL ID Card - Wrap in GestureDetector to navigate to the Home Dashboard
+              GestureDetector(
+                onTap: () => Get.offAllNamed(AppRoute.competitionHistory),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16.r),
+                    border: Border.all(
+                      color: const Color(0xFFE2E8F0),
+                      width: 1.w,
                     ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15.r),
-                  child: Column(
-                    children: [
-                      // Thick Gold/Brown Top Header Border bar
-                      Container(
-                        width: double.infinity,
-                        height: 6.h,
-                        color: const Color(0xFF854D0E), // Gold/Brown color
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.02),
+                        blurRadius: 10.r,
+                        offset: const Offset(0, 4),
                       ),
-                      // ID Card body wrapped in a Stack for the faint watermark
-                      Stack(
-                        children: [
-                          // Faint watermark logo in the bottom right corner
-                          Positioned(
-                            bottom: -24.h,
-                            right: -10.w,
-                            child: Text(
-                              "9",
-                              style: TextStyle(
-                                fontSize: 130.sp,
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xFFF8FAFC), // Faint watermark grey
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.r),
+                    child: Column(
+                      children: [
+                        // Thick Gold/Brown Top Header Border bar
+                        Container(
+                          width: double.infinity,
+                          height: 6.h,
+                          color: const Color(0xFF854D0E), // Gold/Brown color
+                        ),
+                        // ID Card body wrapped in a Stack for the faint watermark
+                        Stack(
+                          children: [
+                            // Faint watermark logo in the bottom right corner
+                            Positioned(
+                              bottom: -24.h,
+                              right: -10.w,
+                              child: Text(
+                                "9",
+                                style: TextStyle(
+                                  fontSize: 130.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xFFF8FAFC), // Faint watermark grey
+                                ),
                               ),
                             ),
-                          ),
-                          
-                          // ID Card details padding
-                          Padding(
-                            padding: EdgeInsets.all(20.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // ID Card Header
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "APEX LEAGUE",
-                                          style: TextStyle(
-                                            fontSize: 11.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.textMuted,
-                                            letterSpacing: 0.8.w,
-                                          ),
-                                        ),
-                                        Text(
-                                          "OFFICIAL",
-                                          style: TextStyle(
-                                            fontSize: 11.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.textMuted,
-                                            letterSpacing: 0.8.w,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    // ACTIVE & VERIFIED Green Badge
-                                    Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                                      decoration: BoxDecoration(
-                                        color: AppColors.secondaryGreen,
-                                        borderRadius: BorderRadius.circular(20.r),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
+
+                            // ID Card details padding
+                            Padding(
+                              padding: EdgeInsets.all(20.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // ID Card Header
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Icon(
-                                            Icons.verified,
-                                            color: Colors.white,
-                                            size: 11.r,
-                                          ),
-                                          SizedBox(width: 4.w),
                                           Text(
-                                            "ACTIVE & VERIFIED",
+                                            "APEX LEAGUE",
                                             style: TextStyle(
-                                              fontSize: 9.sp,
+                                              fontSize: 11.sp,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.white,
+                                              color: AppColors.textMuted,
+                                              letterSpacing: 0.8.w,
+                                            ),
+                                          ),
+                                          Text(
+                                            "OFFICIAL",
+                                            style: TextStyle(
+                                              fontSize: 11.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.textMuted,
+                                              letterSpacing: 0.8.w,
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 16.h),
-
-                                // Name
-                                Text(
-                                  "Johnathan Doe",
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.primaryNavy,
-                                    letterSpacing: -0.2.w,
-                                  ),
-                                ),
-                                SizedBox(height: 16.h),
-
-                                // Photo & Details Row
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Official Photo
-                                    Container(
-                                      width: 90.w,
-                                      height: 90.w,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFF1F5F9),
-                                        borderRadius: BorderRadius.circular(10.r),
-                                        image: const DecorationImage(
-                                          image: NetworkImage(
-                                            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-                                          ),
-                                          fit: BoxFit.cover,
+                                      // ACTIVE & VERIFIED Green Badge
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w,
+                                          vertical: 5.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.secondaryGreen,
+                                          borderRadius: BorderRadius.circular(20.r),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              Icons.verified,
+                                              color: Colors.white,
+                                              size: 11.r,
+                                            ),
+                                            SizedBox(width: 4.w),
+                                            Text(
+                                              "ACTIVE & VERIFIED",
+                                              style: TextStyle(
+                                                fontSize: 9.sp,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 16.h),
+
+                                  // Name
+                                  Text(
+                                    "Johnathan Doe",
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.primaryNavy,
+                                      letterSpacing: -0.2.w,
                                     ),
-                                    SizedBox(width: 20.w),
-                                    // ID details column
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "ID Number",
-                                          style: TextStyle(
-                                            fontSize: 12.sp,
-                                            color: AppColors.textMuted,
+                                  ),
+                                  SizedBox(height: 16.h),
+
+                                  // Photo & Details Row
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      // Official Photo
+                                      Container(
+                                        width: 90.w,
+                                        height: 90.w,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFF1F5F9),
+                                          borderRadius: BorderRadius.circular(10.r),
+                                          image: const DecorationImage(
+                                            image: NetworkImage(
+                                              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+                                            ),
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
-                                        Text(
-                                          "#OFF-99281",
-                                          style: TextStyle(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.primaryNavy,
+                                      ),
+                                      SizedBox(width: 20.w),
+                                      // ID details column
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "ID Number",
+                                            style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: AppColors.textMuted,
+                                            ),
                                           ),
-                                        ),
-                                        SizedBox(height: 12.h),
-                                        Text(
-                                          "Expiry Date",
-                                          style: TextStyle(
-                                            fontSize: 12.sp,
-                                            color: AppColors.textMuted,
+                                          Text(
+                                            "#OFF-99281",
+                                            style: TextStyle(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.primaryNavy,
+                                            ),
                                           ),
-                                        ),
-                                        Text(
-                                          "Dec 2025",
-                                          style: TextStyle(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.primaryNavy,
+                                          SizedBox(height: 12.h),
+                                          Text(
+                                            "Expiry Date",
+                                            style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: AppColors.textMuted,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                          Text(
+                                            "Dec 2025",
+                                            style: TextStyle(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.primaryNavy,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
 
-              SizedBox(height: 64.h),
-
-              // 4. Action dashboard button
-              ElevatedButton(
-                onPressed: () => Get.offAllNamed(AppRoute.home),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.secondaryGreen,
-                  foregroundColor: Colors.white,
-                  minimumSize: Size(double.infinity, 50.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  elevation: 0,
-                ),
-                child: Text(
-                  "Go to Dashboard",
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              // Bottom padding space
+              SizedBox(height: 48.h),
             ],
           ),
         ),
