@@ -3,6 +3,11 @@ import '../../View/Screen/SplashScreen/splash_screen.dart';
 import '../../View/Screen/Auth/login/login_screen.dart';
 import '../../View/Screen/Auth/login/sign_in_screen.dart';
 import '../../View/Screen/Auth/register/register_screen.dart';
+import '../../View/Screen/Auth/selection/selection_screen.dart';
+import '../../View/Screen/Auth/qualification/qualification_management_screen.dart';
+import '../../View/Screen/Auth/qualification/upload_document_screen.dart';
+import '../../View/Screen/Auth/qualification/verification_status_screen.dart';
+import '../../View/Screen/Auth/qualification/verification_complete_screen.dart';
 import '../../View/Screen/Auth/register/applicant_profile_screen.dart';
 import '../../View/Screen/Auth/register/parent_profile_screen.dart';
 import '../../View/Screen/Auth/forgot_password/forgot_password_screen.dart';
@@ -27,6 +32,11 @@ class AppRoute {
   static const String splash = "/splash_screen";
   static const String login = "/login_screen";
   static const String register = "/register_screen";
+  static const String selection = "/selection_screen";
+  static const String qualificationManagement = "/qualification_management_screen";
+  static const String uploadDocument = "/upload_document_screen";
+  static const String verificationStatus = "/verification_status_screen";
+  static const String verificationComplete = "/verification_complete_screen";
   static const String signIn = "/sign_in_screen";
   static const String forgotPassword = "/forgot_password_screen";
   static const String checkEmail = "/check_email_screen";
@@ -60,6 +70,26 @@ class AppRoute {
     GetPage(
       name: register,
       page: () => const RegisterScreen(),
+    ),
+    GetPage(
+      name: selection,
+      page: () => const SelectionScreen(),
+    ),
+    GetPage(
+      name: qualificationManagement,
+      page: () => const QualificationManagementScreen(),
+    ),
+    GetPage(
+      name: uploadDocument,
+      page: () => const UploadDocumentScreen(),
+    ),
+    GetPage(
+      name: verificationStatus,
+      page: () => const VerificationStatusScreen(),
+    ),
+    GetPage(
+      name: verificationComplete,
+      page: () => const VerificationCompleteScreen(),
     ),
     GetPage(
       name: signIn,

@@ -5,6 +5,7 @@ class PrefsHelper {
   static const String refreshToken = "refreshToken";
   static const String userData = "userData";
   static const String userId = "userId";
+  static const String userRole = "userRole";
 
   static Future<SharedPreferences> get _prefs async => await SharedPreferences.getInstance();
 

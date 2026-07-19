@@ -4,6 +4,7 @@ class RegisterController extends GetxController {
   var isLoading = false.obs;
   var isPasswordVisible = false.obs;
   var isConfirmPasswordVisible = false.obs;
+  var selectedRole = 'Competitor'.obs;
 
   void togglePasswordVisibility() {
     isPasswordVisible.value = !isPasswordVisible.value;

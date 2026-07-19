@@ -197,7 +197,7 @@ class SignInScreen extends StatelessWidget {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => Get.toNamed(AppRoute.register),
+                            onTap: () => Get.toNamed(AppRoute.selection),
                             child: Text(
                               "Create Account",
                               style: TextStyle(

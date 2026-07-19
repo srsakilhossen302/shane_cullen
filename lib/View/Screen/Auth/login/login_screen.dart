@@ -196,7 +196,7 @@ class LoginScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             TextButton(
-                              onPressed: () => Get.toNamed(AppRoute.register),
+                              onPressed: () => Get.toNamed(AppRoute.selection),
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,
                                 minimumSize: Size(50.w, 30.h),
